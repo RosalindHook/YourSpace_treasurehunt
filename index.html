@@ -28,6 +28,7 @@
 <script>
     // variable declared to store the map object
     var tree_map;
+    
     // all_markers array initialised to store the marker objects
     all_markers = []
     
@@ -37,6 +38,7 @@
     
     //splits data by new line
     var markers = data.split("\n");
+    var myMarker; // Variable to store the user's marker
     
     // initMap() function is defined, which will be called to initialise the map and create markers.
     function initMap() {
@@ -89,7 +91,12 @@
             lng: position.coords.longitude
         };
 
-        var myMarker = new google.maps.Marker({
+        // Remove the previous position marker if it exists
+        if (myMarker) {
+            myMarker.setMap(null);
+        }
+
+        myMarker = new google.maps.Marker({
             position: myLatLng,
             map: tree_map,
             icon: 'https://maps.google.com/mapfiles/kml/shapes/man.png'
@@ -97,9 +104,7 @@
 
         all_markers.push(myMarker);
     }
-    
-</script>
-    
+              
 </script>
 
 </body>
