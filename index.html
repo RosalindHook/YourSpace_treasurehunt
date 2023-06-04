@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Seears Park Tree Hunt</title>
+    <title>YourSpace Tree-sure Hunt</title>
 </head>
 <style>
 
@@ -22,17 +22,8 @@
 </script>
 
 <body>
-<p>My tree map</p>
+<p>YourSpace Tree-sure Hunt</p>
 <div id="tree_map"></div>
-
-<form>
-  <select id="icon_to_use">
-      <option value="tree.png">Deciduous tree</option>
-      <option value="tree2.png">Evergreen tree</option>
-      <option value="leaf.png">Leaf</option>
-      <option value="flower.png">Flower</option>
-  </select>
-</form>
 
 <script>
     var tree_map;
@@ -41,25 +32,7 @@
             tree_map = new google.maps.Map(document.getElementById('tree_map'),
             {zoom: 18, center: {lat: 51.361376, lng: -0.212899}
             });
-
-        tree_map.addListener('click', function(e) {
-        var location = e.latLng;
-        place_marker(location);
-            });
         }
-
-    function place_marker(location) {
-
-    var emoji = document.getElementById('icon_to_use').value;
-        var marker = new google.maps.Marker({
-            position: location,
-            map: tree_map,
-            icon: emoji
-            });
-        console.log(location.lat() + " " + location.lng() + " " + emoji);
-    }
-
-place_marker();
 
 </script>
 
