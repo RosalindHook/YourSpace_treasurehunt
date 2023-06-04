@@ -26,20 +26,54 @@
 <div id="tree_map"></div>
 
 <script>
+    // variable declared to store the map object
     var tree_map;
+    // all_markers array initialised to store the marker objects
     all_markers = []
     
+    // data variable contains the marker data in a string format - note this can be adjusted based on where the markers need to be placed in the park
     var data = `51.36090873171403 -0.2128131693115165 tree.png
-    51.36158534804417 -0.21196022684478066 flower.png`
+    51.36158534804417 -0.21196022684478066 flower.png`;
+    
+    //splits data by new line
     var markers = data.split("\n");
     
+    // initMap() function is defined, which will be called to initialise the map and create markers.
     function initMap() {
 
+            // tree_map created using the google.maps.Map constructor, specifying the map element and its options
             tree_map = new google.maps.Map(document.getElementById('tree_map'),
             {zoom: 18, center: {lat: 51.361376, lng: -0.212899}
             });
-        }
+        
+        // Loops through the array of all_markers, and each marker's data is trimmed and split into an array.
+        for (var i = 0; i < markers.length; i++){
+            var marker_data = markers[i].trim();
+            marker_data = marker_data.split(" ");
+            
+            // latitude and longitude values extracted from the marker data and converted to floating-point numbers using parseFloat()
+            // emoji variable defined
+            var latitude = parseFloat(marker_data[0]);
+            var longitude = parseFloat(marker_data[1]);
+            var emoji = marker_data[2];
+            
+            // markerPosition object created using the latitude and longitude values
+            var markerPosition = {lat: latitude, lng: longitude};
+       
+            // new marker object is created using the google.maps.Marker constructor, specifying the position, map, and icon
+            var marker = new google.maps.Marker({
+            position: markerPosition,
+            map: tree_map,
+            icon: emoji
+        });
 
+        // newly created marker object is added to the all_markers array
+        // The loop continues until all markers in the markers array are processed.
+        // Once the loop is complete, the initMap() function is closed
+        all_markers.push(marker);
+     
+        }
+    }
 </script>
 
 </body>
