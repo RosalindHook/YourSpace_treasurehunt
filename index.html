@@ -27,6 +27,12 @@
 
 <script>
     var tree_map;
+    all_markers = []
+    
+    var data = `51.36090873171403 -0.2128131693115165 tree.png
+    51.36158534804417 -0.21196022684478066 flower.png`
+    var markers = data.split("\n");
+    
     function initMap() {
 
             tree_map = new google.maps.Map(document.getElementById('tree_map'),
