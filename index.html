@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Yourspace "Tree"-sure Hunt</title>
+</head>
+<style>
+
+  #treasure_map {
+      height: 100%;
+      width: 100%;
+      left: 0;
+      position: absolute;
+      top: 100px;
+      background-color: palegreen;
+  }
+
+</style>
+
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcPEL3GsHaFKvBHv1gX2ergBKIA1HIq3o&callback=initMap">
+</script>
+
+
+<body>
+  <p>"Tree"-sure map</p>
+  <div id="treasure_map"></div>
+  
+  <script>
+    var treasure_map;
+    function initMap() {
+
+            treasure_map = new google.maps.Map(document.getElementById('treasure_map'),
+            {zoom: 18, center: {lat: 51.361376, lng: -0.212899}
+            });
+
+  </script>
+  
+</body>
+</html>
