@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Yourspace "Tree"-sure Hunt</title>
+    <title>Seears Park Tree Hunt</title>
 </head>
 <style>
 
-  #treasure_map {
-      height: 100%;
-      width: 100%;
-      left: 0;
-      position: absolute;
-      top: 100px;
-      background-color: palegreen;
-  }
+#tree_map {
+    height: 100%;
+    width: 100%;
+    left: 0;
+    position: absolute;
+    top: 100px;
+    background-color: palegreen;
+}
 
 </style>
 
@@ -21,20 +21,47 @@
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcPEL3GsHaFKvBHv1gX2ergBKIA1HIq3o&callback=initMap">
 </script>
 
-
 <body>
-  <p>"Tree"-sure map</p>
-  <div id="treasure_map"></div>
-  
-  <script>
-    var treasure_map;
+<p>My tree map</p>
+<div id="tree_map"></div>
+
+<form>
+  <select id="icon_to_use">
+      <option value="tree.png">Deciduous tree</option>
+      <option value="tree2.png">Evergreen tree</option>
+      <option value="leaf.png">Leaf</option>
+      <option value="flower.png">Flower</option>
+  </select>
+</form>
+
+<script>
+    var tree_map;
     function initMap() {
 
-            treasure_map = new google.maps.Map(document.getElementById('treasure_map'),
+            tree_map = new google.maps.Map(document.getElementById('tree_map'),
             {zoom: 18, center: {lat: 51.361376, lng: -0.212899}
             });
 
-  </script>
-  
+        tree_map.addListener('click', function(e) {
+        var location = e.latLng;
+        place_marker(location);
+            });
+        }
+
+    function place_marker(location) {
+
+    var emoji = document.getElementById('icon_to_use').value;
+        var marker = new google.maps.Marker({
+            position: location,
+            map: tree_map,
+            icon: emoji
+            });
+        console.log(location.lat() + " " + location.lng() + " " + emoji);
+    }
+
+place_marker();
+
+</script>
+
 </body>
 </html>
