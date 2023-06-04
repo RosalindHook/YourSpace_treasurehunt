@@ -46,6 +46,13 @@
             {zoom: 18, center: {lat: 51.361376, lng: -0.212899}
             });
         
+        // Check for geolocation support and watch the user's position
+        if (navigator.geolocation) {
+            navigator.geolocation.watchPosition(set_my_position);
+        } else {
+            alert("Geolocation doesn't work in your browser");
+        }
+        
         // Loops through the array of all_markers, and each marker's data is trimmed and split into an array.
         for (var i = 0; i < markers.length; i++){
             var marker_data = markers[i].trim();
@@ -74,6 +81,25 @@
      
         }
     }
+
+    // Geolocation callback function
+    function set_my_position(position) {
+        var myLatLng = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        };
+
+        var myMarker = new google.maps.Marker({
+            position: myLatLng,
+            map: tree_map,
+            icon: 'https://maps.google.com/mapfiles/kml/shapes/man.png'
+        });
+
+        all_markers.push(myMarker);
+    }
+    
+</script>
+    
 </script>
 
 </body>
