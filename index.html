@@ -59,7 +59,7 @@
   
         // Check for geolocation support and watch the user's position
         if (navigator.geolocation) {
-          navigator.geolocation.watchPosition(set_my_position, { enableHighAccuracy: true });
+          navigator.geolocation.watchPosition(set_my_position);
         } else {
           alert("Geolocation doesn't work in your browser");
         }
