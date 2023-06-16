@@ -117,6 +117,8 @@ function set_my_position(position) {
                     what_is_it = what_is_it.replace(".png", "");
                     alert("Found the " + what_is_it);
                     all_markers[i].setMap(null); // Remove the marker from the map
+                    all_markers.splice(i, 1); // Remove the marker from the all_markers array
+                    i--; // Decrement i to account for the removed marker
                 }
             }
         }  
