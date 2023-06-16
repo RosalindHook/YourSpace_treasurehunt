@@ -89,7 +89,7 @@
 
     // Geolocation callback function
 function set_my_position(position) {
-    var myLatLng = {
+    var pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
     };
@@ -100,20 +100,25 @@ function set_my_position(position) {
     }
 
     myMarker = new google.maps.Marker({
-        position: myLatLng,
+        position: pos,
         map: tree_map,
         icon: 'https://maps.google.com/mapfiles/kml/shapes/man.png'
     });
 
     all_markers.push(myMarker);
 
-    // Calculate distance for each marker
-    for (var i = 0; i < all_markers.length; i++) {
-        var distance = google.maps.geometry.spherical.computeDistanceBetween(myLatLng, all_markers[i].getPosition());
-        console.log('Distance to marker ' + i + ': ' + distance + ' meters');
-    }
-}
-              
+// Calculate distance for each marker, check if distance is less than tolerance and if so announce that the user has found the object
+            for (var i = 0; i < all_markers.length; i++) {
+                var distance = google.maps.geometry.spherical.computeDistanceBetween(pos, all_markers[i].getPosition());
+
+                if (distance < tolerance) {
+                    var what_is_it = all_markers[i].getIcon();
+                    what_is_it = what_is_it.replace(".png", "");
+                    alert("Found the " + what_is_it);
+                    all_markers[i].setMap(null); // Remove the marker from the map
+                }
+            }
+        }     
 </script>
 
 </body>
