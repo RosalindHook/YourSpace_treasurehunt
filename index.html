@@ -108,20 +108,25 @@ function set_my_position(position) {
     all_markers.push(myMarker);
 
 // Calculate distance for each marker, check if distance is less than tolerance and if so announce that the user has found the object
-            for (var i = 0; i < all_markers.length; i++) {
-                
-                if (!myMarker || !myMarker.getPosition().equals(all_markers[i].getPosition())) { // Disregard own icon
-                    var distance = google.maps.geometry.spherical.computeDistanceBetween(pos, all_markers[i].getPosition());
+for (var i = 0; i < all_markers.length; i++) {
+    var marker = all_markers[i];
 
-                if (distance < tolerance) {
-                    var what_is_it = all_markers[i].getIcon();
-                    what_is_it = what_is_it.replace(".png", "");
-                    alert("Found the " + what_is_it);
-                    all_markers[i].setMap(null); // Remove the marker from the map
-                    all_markers.splice(i, 1); // Remove the marker from the all_markers array
-                    i--; // Decrement i to account for the removed marker
-                }
-            }
+    // Skip the user's own icon
+    if (marker === myMarker) {
+        continue;
+    }
+
+    var distance = google.maps.geometry.spherical.computeDistanceBetween(pos, marker.getPosition());
+
+    if (distance < tolerance) {
+        var what_is_it = marker.getIcon();
+        what_is_it = what_is_it.replace(".png", "");
+        alert("Found the " + what_is_it);
+        marker.setMap(null); // Remove the marker from the map
+        all_markers.splice(i, 1); // Remove the marker from the all_markers array
+        i--; // Decrement i to account for the removed marker
+    }
+}
         }  
     }
 </script>
