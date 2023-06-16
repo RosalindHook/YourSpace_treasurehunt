@@ -1,11 +1,11 @@
 # YourSpace_treasurehunt
 
 ## Introduction
-1. A community project treasure hunt based on 'Where's Zombie game' (Raspberry Pi Foundation) - reference https://projects.raspberrypi.org/en/projects/wheres-zombie/
+1. A community project treasure hunt based on 'Where's Zombie game' (Raspberry Pi Foundation) - reference https://projects.raspberrypi.org/en/projects/wheres-zombie/. It sets up a simple treasure hunt game using Google Maps API. The map is initialised, and markers are placed on the map based on the provided coordinates and icons. The geolocation feature is used to track the user's position. When the user moves within a certain distance (tolerance) of a marker, an alert is shown indicating what the user has found, and the marker is removed from the map.
 
-2. I used this step by step walk through to develop my own version of code that sets up a treasure hunt scenario where the user's location is tracked.
+2. I used the Raspberry Pi step by step walk through to develop my own version of code that sets up a treasure hunt scenario where the user's location is tracked.
 
-3. When the user is within 5 meters of a tree or flower marker (more to follow), an alert is triggered indicating that the object has been found. The user's own marker (person icon) is not considered for triggering alerts.
+3. When the user is within 5 metres of a tree or flower marker (more to follow), an alert is triggered indicating that the object has been found. The user's own marker (person icon) is not considered for triggering alerts.
 
 4. This code has been developed for Yourspace for their 'Midsummer fair' and is intended for use by local families, children and others to enjoy a fun, short (20-30 minutes) treasure hunt in the local park. It will include interesting features about the trees and wildlife in the park.
 
@@ -43,3 +43,5 @@
 ## Documentation
 
 22. This simple treasure hunt is hosted on Github Pages and can be accessed by going to rosalindhook.github.io/YourSpace_treasurehunt/
+
+23. Need to ensure the API key in the script tag is replaced with your own valid API key. Also, note that the geolocation feature requires user consent and may not work in some browsers or under certain conditions.
