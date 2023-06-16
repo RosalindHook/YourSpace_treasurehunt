@@ -88,25 +88,31 @@
     }
 
     // Geolocation callback function
-    function set_my_position(position) {
-        var myLatLng = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-        };
+function set_my_position(position) {
+    var myLatLng = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+    };
 
-        // Remove the previous position marker if it exists
-        if (myMarker) {
-            myMarker.setMap(null);
-        }
-
-        myMarker = new google.maps.Marker({
-            position: myLatLng,
-            map: tree_map,
-            icon: 'https://maps.google.com/mapfiles/kml/shapes/man.png'
-        });
-
-        all_markers.push(myMarker);
+    // Remove the previous position marker if it exists
+    if (myMarker) {
+        myMarker.setMap(null);
     }
+
+    myMarker = new google.maps.Marker({
+        position: myLatLng,
+        map: tree_map,
+        icon: 'https://maps.google.com/mapfiles/kml/shapes/man.png'
+    });
+
+    all_markers.push(myMarker);
+
+    // Calculate distance for each marker
+    for (var i = 0; i < all_markers.length; i++) {
+        var distance = google.maps.geometry.spherical.computeDistanceBetween(myLatLng, all_markers[i].getPosition());
+        console.log('Distance to marker ' + i + ': ' + distance + ' meters');
+    }
+}
               
 </script>
 
