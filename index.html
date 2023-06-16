@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>YourSpace Tree-sure Hunt</title>
-</head>
-<style>
 
-#tree_map {
+<head>
+  <meta charset="UTF-8">
+  <title>YourSpace Tree-sure Hunt</title>
+</head>
+
+<style>
+  #tree_map {
     height: 100%;
     width: 100%;
     left: 0;
     position: absolute;
     top: 100px;
     background-color: palegreen;
-}
-
+  }
 </style>
 
 <script async defer
@@ -22,112 +22,116 @@
 </script>
 
 <body>
-<p>YourSpace Tree-sure Hunt</p>
-<div id="tree_map"></div>
-
-<script>
-    // variable declared to store the map object
-    var tree_map;
-
-    // tolerance value in metres
-    var tolerance = 5; 
-    
-    // all_markers array initialised to store the marker objects
-    all_markers = []
-    
-    // data variable contains the marker data in a string format - note this can be adjusted based on where the markers need to be placed in the park
-    var data = `51.36090873171403 -0.2128131693115165 tree.png
-    51.36158534804417 -0.21196022684478066 flower.png`;
-    
-    //splits data by new line
-    var markers = data.split("\n");
-    var myMarker; // Variable to store the user's marker
-    
-    // initMap() function is defined, which will be called to initialise the map and create markers.
-    function initMap() {
-
-            // tree_map created using the google.maps.Map constructor, specifying the map element and its options
-            tree_map = new google.maps.Map(document.getElementById('tree_map'),
-            {zoom: 18, center: {lat: 51.361376, lng: -0.212899}
-            });
-        
+    <p>YourSpace Tree-sure Hunt</p>
+    <div id="tree_map"></div>
+  
+    <script>
+      // variable declared to store the map object
+      var tree_map;
+  
+      // tolerance value in metres
+      var tolerance = 5;
+  
+      // all_markers array initialised to store the marker objects
+      var all_markers = [];
+  
+      // data variable contains the marker data in a string format
+      var data = `51.36090873171403 -0.2128131693115165 tree.png
+      51.36158534804417 -0.21196022684478066 flower.png`;
+  
+      // Split data by new line
+      var markers = data.split("\n");
+  
+      // Variable to store the user's marker
+      var userMarker;
+  
+      // initMap() function is defined, which will be called to initialise the map and create markers.
+      function initMap() {
+        // tree_map created using the google.maps.Map constructor, specifying the map element and its options
+        tree_map = new google.maps.Map(document.getElementById('tree_map'), {
+          zoom: 18,
+          center: {
+            lat: 51.361376,
+            lng: -0.212899
+          }
+        });
+  
         // Check for geolocation support and watch the user's position
         if (navigator.geolocation) {
-            navigator.geolocation.watchPosition(set_my_position);
+          navigator.geolocation.watchPosition(set_my_position);
         } else {
-            alert("Geolocation doesn't work in your browser");
+          alert("Geolocation doesn't work in your browser");
         }
-        
-        // Loops through the array of all_markers, and each marker's data is trimmed and split into an array.
-        for (var i = 0; i < markers.length; i++){
-            var marker_data = markers[i].trim();
-            marker_data = marker_data.split(" ");
-            
-            // latitude and longitude values extracted from the marker data and converted to floating-point numbers using parseFloat()
-            // emoji variable defined
-            var latitude = parseFloat(marker_data[0]);
-            var longitude = parseFloat(marker_data[1]);
-            var emoji = marker_data[2];
-            
-            // markerPosition object created using the latitude and longitude values
-            var markerPosition = {lat: latitude, lng: longitude};
-       
-            // new marker object is created using the google.maps.Marker constructor, specifying the position, map, and icon
-            var marker = new google.maps.Marker({
+  
+        // Loops through the array of markers
+        for (var i = 0; i < markers.length; i++) {
+          var markerData = markers[i].trim().split(" ");
+  
+          var latitude = parseFloat(markerData[0]);
+          var longitude = parseFloat(markerData[1]);
+          var icon = markerData[2];
+  
+          var markerPosition = {
+            lat: latitude,
+            lng: longitude
+          };
+  
+          var marker = new google.maps.Marker({
             position: markerPosition,
             map: tree_map,
-            icon: emoji
+            icon: icon
+          });
+  
+          all_markers.push(marker);
+        }
+      }
+  
+      // Geolocation callback function
+      function set_my_position(position) {
+        var pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+  
+        removeUserMarker();
+        createUserMarker(pos);
+      }
+  
+      function removeUserMarker() {
+        if (userMarker) {
+          userMarker.setMap(null);
+        }
+      }
+  
+      function createUserMarker(position) {
+        userMarker = new google.maps.Marker({
+          position: position,
+          map: tree_map,
+          icon: 'https://maps.google.com/mapfiles/kml/shapes/man.png'
         });
 
-        // newly created marker object is added to the all_markers array
-        // The loop continues until all markers in the markers array are processed.
-        // Once the loop is complete, the initMap() function is closed
-        all_markers.push(marker);
+        function handleMarkerDetection(position) {
+      for (var i = 0; i < all_markers.length; i++) {
+        var marker = all_markers[i];
+
+        if (marker === userMarker) {
+          continue;
         }
+
+        var distance = google.maps.geometry.spherical.computeDistanceBetween(position, marker.getPosition());
+
+        if (distance < tolerance) {
+          var what_is_it = marker.getIcon();
+          what_is_it = what_is_it.replace(".png", "");
+          alert("Found the " + what_is_it);
+          marker.setMap(null);
+          all_markers.splice(i, 1);
+          i--;
+        }
+      }
     }
-
-    // Geolocation callback function
-function set_my_position(position){
-    var pos = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-    };
-
-    // Remove the previous position marker if it exists
-    if (myMarker) {
-        myMarker.setMap(null);
-    }
-
-    myMarker = new google.maps.Marker({
-        position: pos,
-        map: tree_map,
-        icon: 'https://maps.google.com/mapfiles/kml/shapes/man.png'
-    });
-
-    all_markers.push(myMarker);
-
-// Calculate distance for each marker, check if distance is less than tolerance and if so announce that the user has found the object
-for (var i = 0; i < all_markers.length; i++) {
-    var marker = all_markers[i];
-
-    // Skip the user's own icon
-    if (marker === myMarker) {
-        continue;
-    }
-
-    var distance = google.maps.geometry.spherical.computeDistanceBetween(pos, marker.getPosition());
-
-    if (distance < tolerance) {
-        var what_is_it = marker.getIcon();
-        what_is_it = what_is_it.replace(".png", "");
-        alert("Found the " + what_is_it);
-        marker.setMap(null); // Remove the marker from the map
-        all_markers.splice(i, 1); // Remove the marker from the all_markers array
-        i--; // Decrement i to account for the removed marker
-    }
-}
-}
-</script>
+  </script>
 
 </body>
+
 </html>
