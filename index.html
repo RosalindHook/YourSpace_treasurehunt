@@ -109,7 +109,8 @@ function set_my_position(position) {
 
 // Calculate distance for each marker, check if distance is less than tolerance and if so announce that the user has found the object
             for (var i = 0; i < all_markers.length; i++) {
-                var distance = google.maps.geometry.spherical.computeDistanceBetween(pos, all_markers[i].getPosition());
+                if (all_markers[i] !== myMarker) { // Disregard own icon
+                    var distance = google.maps.geometry.spherical.computeDistanceBetween(pos, all_markers[i].getPosition());
 
                 if (distance < tolerance) {
                     var what_is_it = all_markers[i].getIcon();
