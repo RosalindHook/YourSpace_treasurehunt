@@ -30,7 +30,7 @@
       var tree_map;
   
       // tolerance value in metres
-      var tolerance = 20;
+      var tolerance = 25;
   
       // all_markers array initialised to store the marker objects
       var all_markers = [];
@@ -55,10 +55,12 @@
             lng: -0.212899
           }
         });
-  
+    
         // Check for geolocation support and watch the user's position
         if (navigator.geolocation) {
-          navigator.geolocation.watchPosition(set_my_position);
+            navigator.geolocation.watchPosition(set_my_position, handle_error, { enableHighAccuracy: true });
+
+          
         } else {
           alert("Geolocation doesn't work in your browser");
         }
