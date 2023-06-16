@@ -18,7 +18,7 @@
 </style>
 
 <script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcPEL3GsHaFKvBHv1gX2ergBKIA1HIq3o&callback=initMap">
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcPEL3GsHaFKvBHv1gX2ergBKIA1HIq3o&callback=initMap&libraries=geometry">
 </script>
 
 <body>
@@ -28,6 +28,9 @@
 <script>
     // variable declared to store the map object
     var tree_map;
+
+    // tolerance value in metres
+    var tolerance = 5; 
     
     // all_markers array initialised to store the marker objects
     all_markers = []
