@@ -95,9 +95,14 @@
           lat: position.coords.latitude,
           lng: position.coords.longitude
         };
-  
+
+        // Remove the previous position marker if it exists
         removeUserMarker();
+
+        // Create a new marker for the current position
         createUserMarker(pos);
+
+        // Calculate distance for each marker and handle if it's within tolerance
         handleMarkerDetection(pos); // Call handleMarkerDetection with the user's position
       }
   
@@ -107,36 +112,35 @@
         }
       }
   
-      function createUserMarker(position) {
-        userMarker = new google.maps.Marker({
-          position: position,
-          map: tree_map,
-          icon: 'https://maps.google.com/mapfiles/kml/shapes/man.png'
-        });
+     function createUserMarker(position) {
+    userMarker = new google.maps.Marker({
+      position: position,
+      map: tree_map,
+      icon: 'https://maps.google.com/mapfiles/kml/shapes/man.png'
+    });
+  }
 
-        function handleMarkerDetection(position) {
-      for (var i = 0; i < all_markers.length; i++) {
-        var marker = all_markers[i];
+  // Function to handle marker detection
+  function handleMarkerDetection(position) {
+    for (var i = 0; i < all_markers.length; i++) {
+      var marker = all_markers[i];
+      if (marker === userMarker) {
+        continue;
+      }
 
-        if (marker === userMarker) {
-          continue;
-        }
+      var distance = google.maps.geometry.spherical.computeDistanceBetween(position, marker.getPosition());
 
-        var distance = google.maps.geometry.spherical.computeDistanceBetween(position, marker.getPosition());
-
-        if (distance < tolerance) {
-          var what_is_it = marker.getIcon();
-          what_is_it = what_is_it.replace(".png", "");
-          alert("Found the " + what_is_it);
-          marker.setMap(null);
-          all_markers.splice(i, 1);
-          i--;
-        }
+      if (distance < tolerance) {
+        var what_is_it = marker.getIcon();
+        what_is_it = what_is_it.replace(".png", "");
+        alert("Found the " + what_is_it);
+        marker.setMap(null);
+        all_markers.splice(i, 1);
+        i--;
       }
     }
   }
-  </script>
-
+</script>
 </body>
 
 </html>
