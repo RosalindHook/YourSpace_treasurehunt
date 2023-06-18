@@ -27,8 +27,10 @@
 6. A new marker is created for the user's position using the Google Maps Marker constructor, and it is added to the all_markers array. The code then loops through all the markers in the all_markers array. For each marker, it checks if it is the user's own marker. If it is, the loop skips to the next iteration. For each non-user marker, the code calculates the distance between the user's position and the marker using the computeDistanceBetween() function from the Google Maps Geometry library. If the distance is less than the tolerance value (25 metres), an alert is triggered indicating that the marker has been found. The marker is also removed from the map and the all_markers array.
    
 7. The loop continues until all markers have been checked.
+  
+9. There is also a scoring feature - the score will be displayed on the web page as "Score: 0" initially, and it will be updated each time the user finds a marker by 1.
    
-8. To follow - (16 June 2023) - this code is now at a test stage to check that the code defined above runs as expected. If it works correctly, then the following features will be added:
+10. To follow - (16 June 2023) - this code is now at a test stage to check that the code defined above runs as expected. If it works correctly, then the following features will be added:
 
 * score count when a user finds an icon (currently tree or flower)
 * more icons based on interesting features in the park
