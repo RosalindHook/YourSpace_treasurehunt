@@ -30,11 +30,7 @@
   
 9. There is also a scoring feature - the score will be displayed on the web page as "Score: 0" initially, and it will be updated each time the user finds a marker by 1.
    
-10. To follow - (16 June 2023) - this code is now at a test stage to check that the code defined above runs as expected. If it works correctly, then the following features will be added:
-
-* score count when a user finds an icon (currently tree or flower)
-* more icons based on interesting features in the park
-* pop up boxes with more information about the features, to enable families and children to learn more about the local wildlife and nature in the park.
+10. A pop-up box will show a corresponding image and information based on the object index of the detected marker - this is intended to teach children and families about interesting objects in the park.
 
 ## Documentation
 
