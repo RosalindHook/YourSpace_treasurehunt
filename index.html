@@ -4,6 +4,19 @@
 <head>
   <meta charset="UTF-8">
   <title>YourSpace Tree-sure Hunt</title>
+    <style>
+    /* Styles for the pop-up box */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      padding: 20px;
+      z-index: 9999;
+    }
+  </style>
 </head>
 
 <style>
@@ -14,7 +27,7 @@
     position: absolute;
     top: 100px;
     background-color: palegreen;
-  }
+  }  
 </style>
 
 <script async defer
@@ -25,7 +38,13 @@
     <p>YourSpace Tree-sure Hunt</p>
     <p id="score">Score: 0</p>
     <div id="tree_map"></div>
-  
+    <!-- Pop-up box content -->
+    <div class="popup" id="popupBox">
+    <img id="popupImage" src="" alt="Found Object">
+    <p id="popupInfo"></p>
+    <button onclick="closePopup()">Close</button>
+    </div>
+
     <script>
       // variable declared to store the map object
       var tree_map;
@@ -40,10 +59,10 @@
       var all_markers = [];
   
       // data variable contains the marker data in a string format
-      var data = `51.36090873171403 -0.2128131693115165 tree.png
-      51.36158534804417 -0.21196022684478066 flower.png
-      51.3647254538826 -0.21169339639094842 leaf.png
-      51.36491615123361 -0.21205793478312085 leaf.png
+      var data = `51.36090873171403 -0.2128131693115165 tree.png 0
+      51.36158534804417 -0.21196022684478066 flower.png 1
+      51.3647254538826 -0.21169339639094842 leaf.png 2
+      51.36491615123361 -0.21205793478312085 leaf.png 3
       `;
   
       // Split data by new line
@@ -51,7 +70,7 @@
   
       // Variable to store the user's marker
       var userMarker;
-  
+
       // initMap() function is defined, which will be called to initialise the map and create markers.
       function initMap() {
         // tree_map created using the google.maps.Map constructor, specifying the map element and its options
@@ -77,6 +96,7 @@
           var latitude = parseFloat(markerData[0]);
           var longitude = parseFloat(markerData[1]);
           var icon = markerData[2];
+          var objectIndex = parseInt(markerData[3]); // Parse the object index
   
           var markerPosition = {
             lat: latitude,
@@ -86,7 +106,8 @@
           var marker = new google.maps.Marker({
             position: markerPosition,
             map: tree_map,
-            icon: icon
+            icon: icon,
+            objectIndex: objectIndex // Store the object index as a property
           });
   
           all_markers.push(marker);
@@ -138,6 +159,8 @@
         var what_is_it = marker.getIcon();
         what_is_it = what_is_it.replace(".png", "");
         alert("Found the " + what_is_it);
+        var objectIndex = marker.objectIndex; // Retrieve the object index from the marker
+      showPopup(objectIndex);
         score++;
         document.getElementById("score").textContent = "Score: " + score;
         marker.setMap(null);
