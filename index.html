@@ -23,11 +23,15 @@
 
 <body>
     <p>YourSpace Tree-sure Hunt</p>
+    <p id="score">Score: 0</p>
     <div id="tree_map"></div>
   
     <script>
       // variable declared to store the map object
       var tree_map;
+
+      // variable to store score
+      var score = 0;
   
       // tolerance value in metres
       var tolerance = 25;
@@ -134,6 +138,8 @@
         var what_is_it = marker.getIcon();
         what_is_it = what_is_it.replace(".png", "");
         alert("Found the " + what_is_it);
+        score++;
+        document.getElementById("score").textContent = "Score: " + score;
         marker.setMap(null);
         all_markers.splice(i, 1);
         i--;
