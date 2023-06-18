@@ -160,7 +160,7 @@
         what_is_it = what_is_it.replace(".png", "");
         alert("Found the " + what_is_it);
         var objectIndex = marker.objectIndex; // Retrieve the object index from the marker
-      showPopup(objectIndex);
+        showPopup(objectIndex);
         score++;
         document.getElementById("score").textContent = "Score: " + score;
         marker.setMap(null);
@@ -169,6 +169,38 @@
       }
     }
   }
+    // Function to show the pop-up box
+    function showPopup(objectIndex) {
+      var popupBox = document.getElementById("popupBox");
+      var popupImage = document.getElementById("popupImage");
+      var popupInfo = document.getElementById("popupInfo");
+
+      // Set the image source and information based on the object index
+      if (objectIndex === 0) {
+        popupImage.src = "tree.png";
+        popupInfo.textContent = "This is a tree";
+      } else if (objectIndex === 1) {
+        popupImage.src = "flower.png";
+        popupInfo.textContent = "This is a flower";
+      } else if (objectIndex === 2) {
+        popupImage.src = "leaf.png";
+        popupInfo.textContent = "This is a leaf";
+      } else if (objectIndex === 3) {
+        popupImage.src = "leaf.png";
+        popupInfo.textContent = "This is another leaf";
+      }
+
+      // Display the pop-up box
+      popupBox.style.display = "block";
+    }
+
+    // Function to close the pop-up box
+    function closePopup() {
+      var popupBox = document.getElementById("popupBox");
+      popupBox.style.display = "none";
+    }
+
+      
 </script>
 </body>
 
