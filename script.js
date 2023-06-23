@@ -53,74 +53,94 @@
   
         // Check for geolocation support and watch the user's position
         if (navigator.geolocation) {
-          navigator.geolocation.watchPosition(set_my_position);
-        } else {
-          alert("Geolocation doesn't work in your browser");
-        }
-  
-        // Loops through the array of markers
-        for (var i = 0; i < markers.length; i++) {
-          var markerData = markers[i].trim().split(" ");
-  
-          var latitude = parseFloat(markerData[0]);
-          var longitude = parseFloat(markerData[1]);
-          var icon = markerData[2];
-          var objectIndex = parseInt(markerData[3]); // Parse the object index
-  
-          var markerPosition = {
-            lat: latitude,
-            lng: longitude
-          };
-  
-          var marker = new google.maps.Marker({
-            position: markerPosition,
-            map: tree_map,
-            icon: icon,
-            objectIndex: objectIndex // Store the object index as a property
-          });
-  
-          all_markers.push(marker);
-        }
-      }
-  
-      // Geolocation callback function
-      function set_my_position(position) {
-        var pos = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
+  var geolocationOptions = {
+    enableHighAccuracy: true,
+    maximumAge: 1000
+  };
+  navigator.geolocation.watchPosition(set_my_position, handle_geolocation_error, geolocationOptions);
+} else {
+  alert("Geolocation doesn't work in your browser");
+}
 
-        // Remove the previous position marker if it exists
-        removeUserMarker();
-
-        // Create a new marker for the current position
-        createUserMarker(pos);
-
-        // Calculate distance for each marker and handle if it's within tolerance
-        handleMarkerDetection(pos); // Call handleMarkerDetection with the user's position
-      }
-  
-      function removeUserMarker() {
-        if (userMarker) {
-          userMarker.setMap(null);
-        }
-      }
-  
-     function createUserMarker(position) {
-    userMarker = new google.maps.Marker({
-      position: position,
-      map: tree_map,
-      icon: 'https://maps.google.com/mapfiles/kml/shapes/man.png'
-    });
+function handle_geolocation_error(error) {
+  switch (error.code) {
+    case error.PERMISSION_DENIED:
+      console.log("User denied the request for Geolocation.");
+      break;
+    case error.POSITION_UNAVAILABLE:
+      console.log("Location information is unavailable.");
+      break;
+    case error.TIMEOUT:
+      console.log("The request to get user location timed out.");
+      break;
+    case error.UNKNOWN_ERROR:
+      console.log("An unknown error occurred.");
+      break;
   }
+}
 
-  // Function to handle marker detection
-  function handleMarkerDetection(position) {
-    for (var i = 0; i < all_markers.length; i++) {
-      var marker = all_markers[i];
-      if (marker === userMarker) {
-        continue;
-      }
+// Loops through the array of markers
+for (var i = 0; i < markers.length; i++) {
+  var markerData = markers[i].trim().split(" ");
+
+  var latitude = parseFloat(markerData[0]);
+  var longitude = parseFloat(markerData[1]);
+  var icon = markerData[2];
+  var objectIndex = parseInt(markerData[3]); // Parse the object index
+
+  var markerPosition = {
+    lat: latitude,
+    lng: longitude
+  };
+
+  var marker = new google.maps.Marker({
+    position: markerPosition,
+    map: tree_map,
+    icon: icon,
+    objectIndex: objectIndex // Store the object index as a property
+  });
+
+  all_markers.push(marker);
+}
+
+// Geolocation callback function
+function set_my_position(position) {
+  var pos = {
+    lat: position.coords.latitude,
+    lng: position.coords.longitude
+  };
+
+  // Remove the previous position marker if it exists
+  removeUserMarker();
+
+  // Create a new marker for the current position
+  createUserMarker(pos);
+
+  // Calculate distance for each marker and handle if it's within tolerance
+  handleMarkerDetection(pos); // Call handleMarkerDetection with the user's position
+}
+
+function removeUserMarker() {
+  if (userMarker) {
+    userMarker.setMap(null);
+  }
+}
+
+function createUserMarker(position) {
+  userMarker = new google.maps.Marker({
+    position: position,
+    map: tree_map,
+    icon: 'https://maps.google.com/mapfiles/kml/shapes/man.png'
+  });
+}
+
+// Function to handle marker detection
+function handleMarkerDetection(position) {
+  for (var i = 0; i < all_markers.length; i++) {
+    var marker = all_markers[i];
+    if (marker === userMarker) {
+      continue;
+    }
 
       var distance = google.maps.geometry.spherical.computeDistanceBetween(position, marker.getPosition());
 
