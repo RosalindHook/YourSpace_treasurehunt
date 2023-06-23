@@ -51,6 +51,11 @@ function closeInstructionsPopup() {
   popup.style.display = "none";
 }
 
+// Add event listener to window object for page load
+window.addEventListener('load', function() {
+  showInstructionsPopup();
+});
+
 
       // initMap() function is defined, which will be called to initialise the map and create markers.
       function initMap() {
