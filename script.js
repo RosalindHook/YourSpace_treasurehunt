@@ -41,6 +41,7 @@
       var userMarker;
 
  // function to show instructions on page loading and close instructions - 
+// function to show instructions on page loading and close instructions
 function showInstructionsPopup() {
   var popup = document.getElementById("instructionsPopup");
   popup.style.display = "block";
@@ -49,6 +50,8 @@ function showInstructionsPopup() {
 function closeInstructionsPopup() {
   var popup = document.getElementById("instructionsPopup");
   popup.style.display = "none";
+}
+
 
       // initMap() function is defined, which will be called to initialise the map and create markers.
       function initMap() {
@@ -59,7 +62,9 @@ function closeInstructionsPopup() {
             lat: 51.361376,
             lng: -0.212899
           }
-        });
+        })
+      }
+      };
   
         // Check for geolocation support and watch the user's position
         if (navigator.geolocation) {
