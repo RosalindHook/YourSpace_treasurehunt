@@ -50,6 +50,7 @@
        lng: -0.212899
      }
    })
+  
 // Loops through the array of markers
 for (var i = 0; i < markers.length; i++) {
     var markerData = markers[i].trim().split(" ");
@@ -110,12 +111,17 @@ case error.UNKNOWN_ERROR:
 
 // Geolocation callback function
 function set_my_position(position) {
+
 var pos = {
 lat: position.coords.latitude,
 lng: position.coords.longitude
 };
 
-// Remove the previous position marker if it exists
+// NEW Call the geolocationSupport() function outside the initMap() function
+geolocationSupport();
+ 
+ 
+ // Remove the previous position marker if it exists
 removeUserMarker();
 
 // Create a new marker for the current position
