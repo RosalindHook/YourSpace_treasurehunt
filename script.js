@@ -40,8 +40,7 @@
       // Variable to store the user's marker
       var userMarker;
 
- // function to show instructions on page loading and close instructions - 
-// function to show instructions on page loading and close instructions
+// function to show instructions on page loading and close instructions - 
 function showInstructionsPopup() {
   var popup = document.getElementById("instructionsPopup");
   popup.style.display = "block";
@@ -63,7 +62,6 @@ function closeInstructionsPopup() {
             lng: -0.212899
           }
         })
-      }
       };
   
         // Check for geolocation support and watch the user's position
@@ -96,7 +94,6 @@ function closeInstructionsPopup() {
   
           all_markers.push(marker);
         }
-      }
   
       // Geolocation callback function
       function set_my_position(position) {
