@@ -1,4 +1,4 @@
-// variable declared to store the map object
+      // variable declared to store the map object
       var tree_map;
 
       // variable to store score
@@ -40,23 +40,6 @@
       // Variable to store the user's marker
       var userMarker;
 
-// function to show instructions on page loading and close instructions - 
-function showInstructionsPopup() {
-  var popup = document.getElementById("instructionsPopup");
-  popup.style.display = "block";
-}
-
-function closeInstructionsPopup() {
-  var popup = document.getElementById("instructionsPopup");
-  popup.style.display = "none";
-}
-
-// Add event listener to window object for page load
-window.addEventListener('load', function() {
-  showInstructionsPopup();
-});
-
-
       // initMap() function is defined, which will be called to initialise the map and create markers.
       function initMap() {
         // tree_map created using the google.maps.Map constructor, specifying the map element and its options
@@ -66,8 +49,7 @@ window.addEventListener('load', function() {
             lat: 51.361376,
             lng: -0.212899
           }
-        })
-      };
+        });
   
         // Check for geolocation support and watch the user's position
         if (navigator.geolocation) {
@@ -99,6 +81,7 @@ window.addEventListener('load', function() {
   
           all_markers.push(marker);
         }
+      }
   
       // Geolocation callback function
       function set_my_position(position) {
