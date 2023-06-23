@@ -20,10 +20,14 @@
 
 /* Styling for the user's score */
 #score {
-  font-size: 24px; /* Increase the font size */
-  font-weight: bold; /* Add bold style */
-  color: #f00; /* Change the text color to red */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a subtle text shadow */
+  position: relative;
+  z-index: 1;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 10px;
+  margin-top: 20px; /* Adjust this value as needed */
 }
 
 /* Styles for the pop-up box */
