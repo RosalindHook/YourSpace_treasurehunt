@@ -32,6 +32,7 @@
       51.361420883556214 -0.2138967817535331 flower.png 17
       51.361477826263176 -0.21362587864302895 tree2.png 18
       51.36169722250163 -0.2134649461021354 flower.png 19
+      51.364892141198986 -0.21211878530216444 flower.png 20
       `
       // Split data by new line
       var markers = data.split("\n");
@@ -204,6 +205,10 @@
       } else if (objectIndex === 19) {
         popupImage.src = "blackberry.jpg";
         popupInfo.textContent = "This is a blackberry bush - there aren’t any sweet blackberries yet (though a few green fruit are starting to appear), but look out for the white and pale pink flowers and spiky branches.";
+      }
+      else if (objectIndex === 20) {
+        popupImage.src = "blackberry.jpg";
+        popupInfo.textContent = "This is a test blah blah blah";
       }
 
       // Display the pop-up box
