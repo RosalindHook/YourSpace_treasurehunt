@@ -50,7 +50,10 @@
        lng: -0.212899
      }
    })
-  
+
+// NEW Call the geolocationSupport() function
+geolocationSupport();
+   
 // Loops through the array of markers
 for (var i = 0; i < markers.length; i++) {
     var markerData = markers[i].trim().split(" ");
@@ -117,10 +120,6 @@ lat: position.coords.latitude,
 lng: position.coords.longitude
 };
 
-// NEW Call the geolocationSupport() function outside the initMap() function
-geolocationSupport();
- 
- 
  // Remove the previous position marker if it exists
 removeUserMarker();
 
