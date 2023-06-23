@@ -42,11 +42,7 @@
 
 .content {
   padding-top: 60px; /* Adjust the top padding to accommodate the navbar */
-}
-
-.instructions {
   font-family: "Arial", sans-serif;
-  margin-top: 20px; /* Adjust the margin as desired */
 }
 
 /* Main map */
