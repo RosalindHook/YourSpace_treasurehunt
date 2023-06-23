@@ -5,7 +5,7 @@
  var score = 0;
 
  // tolerance value in metres
- var tolerance = 25;
+ var tolerance = 5;
 
  // all_markers array initialised to store the marker objects
  var all_markers = [];
