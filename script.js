@@ -127,7 +127,7 @@
       if (distance < tolerance) {
         var what_is_it = marker.getIcon();
         what_is_it = what_is_it.replace(".png", "");
-        alert("Found the " + what_is_it);
+        alert("You found tree-sure... Have a point!");
         var objectIndex = marker.objectIndex; // Retrieve the object index from the marker
         showPopup(objectIndex);
         score++;
