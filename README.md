@@ -5,7 +5,7 @@
 
 2. I used the Raspberry Pi step by step walk through to develop my own version of code that sets up a treasure hunt scenario where the user's location is tracked.
   
-4. When the user is within 5 metres of a tree or flower marker, an alert is triggered indicating that the object has been found. The user's own marker (person icon) is not considered for triggering alerts.
+4. When the user is within 10 metres of a tree or flower marker, an alert is triggered indicating that the object has been found. The user's own marker (person icon) is not considered for triggering alerts.
 
 5. This code has been developed for Yourspace for their 'Midsummer fair' (Saturday 24 June - Sunday 25 June 2023) and is intended for use by local families, children and others to enjoy a fun, short (20-30 minutes) treasure hunt in the local park. It will include interesting features about the trees and wildlife in the park.
 
@@ -28,7 +28,7 @@
 * I implemented error handling in the set_my_position() function to handle any errors that might occur during geolocation retrieval. I added an error callback function as the second argument to watchPosition() which could then handle errors accordingly.
 * I also adjusted the maximumAge option in the watchPosition() call to specify the maximum age of a cached position that can be used. Setting a lower value, such as 1000 milliseconds, helped ensure that the position is more up-to-date.
    
-6. Inside the set_my_position() function (geolocation callback), the user's position is obtained and stored in the pos variable. If the user's marker (myMarker) already exists, it is removed from the map. A new marker is created for the user's position using the Google Maps Marker constructor, and it is added to the all_markers array. The code then loops through all the markers in the all_markers array. For each marker, it checks if it is the user's own marker. If it is, the loop skips to the next iteration. For each non-user marker, the code calculates the distance between the user's position and the marker using the computeDistanceBetween() function from the Google Maps Geometry library. If the distance is less than the tolerance value (5 metres), an alert is triggered indicating that the marker has been found. The marker is also removed from the map and the all_markers array.
+6. Inside the set_my_position() function (geolocation callback), the user's position is obtained and stored in the pos variable. If the user's marker (myMarker) already exists, it is removed from the map. A new marker is created for the user's position using the Google Maps Marker constructor, and it is added to the all_markers array. The code then loops through all the markers in the all_markers array. For each marker, it checks if it is the user's own marker. If it is, the loop skips to the next iteration. For each non-user marker, the code calculates the distance between the user's position and the marker using the computeDistanceBetween() function from the Google Maps Geometry library. If the distance is less than the tolerance value (10 metres), an alert is triggered indicating that the marker has been found. The marker is also removed from the map and the all_markers array.
    
 7. The loop continues until all markers have been checked.
   
