@@ -1,4 +1,4 @@
-      // variable declared to store the map object
+// variable declared to store the map object
       var tree_map;
 
       // variable to store score
@@ -39,6 +39,16 @@
   
       // Variable to store the user's marker
       var userMarker;
+
+ // function to show instructions on page loading and close instructions - 
+function showInstructionsPopup() {
+  var popup = document.getElementById("instructionsPopup");
+  popup.style.display = "block";
+}
+
+function closeInstructionsPopup() {
+  var popup = document.getElementById("instructionsPopup");
+  popup.style.display = "none";
 
       // initMap() function is defined, which will be called to initialise the map and create markers.
       function initMap() {
