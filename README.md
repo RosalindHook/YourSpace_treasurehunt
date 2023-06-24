@@ -18,7 +18,7 @@
 * an empty array to store marker objects (all_markers)
 * a string variable (data) that contains marker data in the format of latitude, longitude, and emoji icon.
 
-3. Please note that the marker data was developed by adapting a similar Raspberry Pi project https://projects.raspberrypi.org/en/projects/zombie-apocalypse-map/9 (my mapping of the local area can be found here: https://github.com/RosalindHook/Yourspace_treehunt. Having created this map with interesting features on it, I copied the data for the treasure hunt (i.e. the precise coordinates needed for the features) from the console.
+3. Please note that the marker data and map location was developed by adapting another Raspberry Pi project https://projects.raspberrypi.org/en/projects/zombie-apocalypse-map/9 (my mapping of the local area can be found here: https://github.com/RosalindHook/Yourspace_treehunt). Having created this map with features in the correct places for the hunt, I copied the data with the precise coordinates needed from the console.
   
 4. The initMap() function is defined, which initialises the map using the Google Maps API and creates markers based on the marker data. The code then loops through the markers array and creates markers for each marker data. It extracts latitude, longitude, icon, and object index from each markerData entry. Each marker is created using the google.maps.Marker constructor and added to the tree_map with the specified position, icon, and object index. The initMap function also checks for geolocation suport by calling the function geolocationSupport() and watches the user's position using the browser's geolocation API.
   
